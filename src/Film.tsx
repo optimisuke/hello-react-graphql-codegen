@@ -1,24 +1,13 @@
-import { FragmentType, useFragment } from "./gql/fragment-masking";
-import { graphql } from "../src/gql";
-
-export const FilmFragment = graphql(/* GraphQL */ `
-  fragment FilmItem on Film {
-    id
-    title
-    releaseDate
-    producers
-  }
-`);
+import { Film as GqlFilm } from "./gql/generated";
 
 const Film = (props: {
   /* `film` property has the correct type 🎉 */
-  film: FragmentType<typeof FilmFragment>;
+  film: GqlFilm;
 }) => {
-  const film = useFragment(FilmFragment, props.film);
   return (
     <div>
-      <h3>{film.title}</h3>
-      <p>{film.releaseDate}</p>
+      <h3>{props.film.title}</h3>
+      <p>{props.film.releaseDate}</p>
     </div>
   );
 };
