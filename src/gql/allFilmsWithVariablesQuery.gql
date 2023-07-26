@@ -1,0 +1,9 @@
+query allFilmsWithVariablesQuery($first: Int!) {
+  allFilms(first: $first) {
+    edges {
+      node {
+        ...FilmItem
+      }
+    }
+  }
+}

@@ -1,26 +1,17 @@
-import React from "react";
 import { useQuery } from "@apollo/client";
 
 import "./App.css";
 import Film from "./Film";
-import { graphql } from "../src/gql";
-
-const allFilmsWithVariablesQueryDocument = graphql(/* GraphQL */ `
-  query allFilmsWithVariablesQuery($first: Int!) {
-    allFilms(first: $first) {
-      edges {
-        node {
-          ...FilmItem
-        }
-      }
-    }
-  }
-`);
+import {
+  AllFilmsWithVariablesQueryDocument,
+  AllFilmsWithVariablesQueryQueryVariables,
+} from "./gql/generated";
 
 function App() {
-  // `data` is typed!
-  const { data } = useQuery(allFilmsWithVariablesQueryDocument, {
-    variables: { first: 10 },
+  // `data` and `variables` are typed!
+  const variables: AllFilmsWithVariablesQueryQueryVariables = { first: 10 };
+  const { data } = useQuery(AllFilmsWithVariablesQueryDocument, {
+    variables: variables,
   });
   return (
     <div className="App">
